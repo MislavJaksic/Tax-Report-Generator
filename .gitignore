@@ -106,4 +106,4 @@ venv.bak/
 # Privacy exclusion
 
 TaxReportGenerator/Settings/LegalSettings.py
-data/
+data/real_data
