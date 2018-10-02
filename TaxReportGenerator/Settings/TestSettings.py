@@ -1,0 +1,8 @@
+data_file_path = "data/test_data/TestData.xlsx"
+customers_file_path = "data/test_data/TestKupci.xlsx"
+vendors_file_path = "data/test_data/TestDobavljači.xlsx"
+invoices_file_path = "data/test_data/TestInvoices.xls"
+IRA_EU_file_path = "data/test_data/TestIRA_EU.xlsx"
+URA_EU_DC_file_path = "data/test_data/TestURA_EU_DC.xlsx"
+URA_EU_DOM_file_path = "data/test_data/TestURA_EU_DOM.xlsx"
+URA_EU_UVOZ_file_path = "data/test_data/TestURA_EU_UVOZ.xlsx"
