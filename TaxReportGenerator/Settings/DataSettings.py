@@ -31,6 +31,7 @@ vendors_columns = [("D", state_vendors, "U"),
 invoices_file_path = "data/real_data/Invoices.xls"
 invoices = "invoices"
 invoices_skip_footer = 1
+invoices_empty_cell_value = "nan"
 
 posting_date_invoices = "Posting date"
 posting_currency_invoices = "Posting Currency"

@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 from TaxReportGenerator.Containers.TablesContainer import TablesContainer
 from TaxReportGenerator.Settings import DataSettings
 from TaxReportGenerator.Settings import LegalSettings
