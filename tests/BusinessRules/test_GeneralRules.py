@@ -11,19 +11,14 @@ import pytest
 
 
 
-def test_ChangeValueToNaNInDataFrame():
-  table_info = ExcelInfoContainer()
-  for column_info in TestSettings.invoices_info:
-    table_info.AddExcelLetterColumnHeaderDataTypeTuple(column_info)
+def test_ChangeValueToNull():
+  column_name = "column"
+  nan_value = "nan"
+  data = pandas.DataFrame({column_name : [1.0, 2, 3, nan_value]});
   
-  settings = Loading.GetExcelSettings(TestSettings.invoices_file_path,
-                                      table_info,
-                                      TestSettings.invoices_footer_rows)
+  assert pandas.isnull(data.at[3,column_name]) == False
   
-  data = Loading.LoadExcel(settings)
+  data = GeneralRules.ChangeValueToNaNInDataFrame(nan_value, data)
 
-  assert pandas.isnull(data.at[3,DataSettings.invoice_number_invoices]) == False
+  assert pandas.isnull(data.at[3,column_name])
   
-  data = GeneralRules.ChangeValueToNaNInDataFrame(TestSettings.invoices_empty_cell_value, data)
-
-  assert pandas.isnull(data.at[3,DataSettings.invoice_number_invoices]) == True

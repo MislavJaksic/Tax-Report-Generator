@@ -1,53 +1,46 @@
 # -*- encoding: utf-8 -*-
 
 import pandas
-import numpy
 import datetime
+import math
 from TaxReportGenerator.Settings import TestSettings
 
 import pytest
 
-
-
-def test_PandasReadString():
-  file_path = TestSettings.sample_data_file_path
-  rename_columns = TestSettings.sample_data_renaming_labels
-  excel_columns = TestSettings.sample_data_excel_columns
-  data_types = {"numbers" : "U", "dates" : "M"}
-  data = pandas.read_excel(io=file_path,
-                           names=rename_columns,
-                           usecols=excel_columns,
+@pytest.fixture(scope='module')
+def TestExcel():
+  data_types = {"integers" : "int8",
+                "float_integers" : "f",
+                "integer_floats" : "int8",
+                "floats" : "f",
+                "strings" : "U",
+                "dates" : "M"}
+  data = pandas.read_excel(io=TestSettings.sample_data_file_path,
+                           names=TestSettings.sample_data_renaming_labels,
+                           usecols=TestSettings.sample_data_excel_columns,
                            dtype=data_types,
                            skipfooter=1,
                           )
-                          
-  assert data.at[2,rename_columns[0]] == "11.0"
+  return data
   
-def test_PandasReadFloat():
-  file_path = TestSettings.sample_data_file_path
-  rename_columns = TestSettings.sample_data_renaming_labels
-  excel_columns = TestSettings.sample_data_excel_columns
-  data_types = {"numbers" : "f", "dates" : "M"}
-  data = pandas.read_excel(io=file_path,
-                           names=rename_columns,
-                           usecols=excel_columns,
-                           dtype=data_types,
-                           skipfooter=1,
-                          )
-                          
-  assert data.at[2,rename_columns[0]] == 11.0
+def test_PandasReadInteger(TestExcel):
+  assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[0]] == 3
+
+def test_PandasReadFloatInteger(TestExcel):
+  assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[1]] == 3.0
+
+def test_PandasReadIntegerFloat(TestExcel):
+  assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[2]] == 3
   
-def test_PandasReadDate():
-  file_path = TestSettings.sample_data_file_path
-  rename_columns = TestSettings.sample_data_renaming_labels
-  excel_columns = TestSettings.sample_data_excel_columns
-  data_types = {"numbers" : "f", "dates" : "M"}
-  data = pandas.read_excel(io=file_path,
-                           names=rename_columns,
-                           usecols=excel_columns,
-                           dtype=data_types,
-                           skipfooter=1,
-                          )
-                          
-  assert data.at[2,rename_columns[1]] == datetime.datetime(2013,3,3)
+def test_PandasReadFloat(TestExcel):
+  assert math.isclose(TestExcel.at[2,TestSettings.sample_data_renaming_labels[3]], 3.00001, abs_tol=0.001)
+
+def test_PandasReadString(TestExcel):
+  assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[4]] == "world"
+
+def test_PandasReadDates(TestExcel):
+  assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[5]] == datetime.datetime(2013,3,3)
+  
+def test_PandasReadEmptyCall(TestExcel):
+  assert pandas.isnull(TestExcel.at[0,TestSettings.sample_data_renaming_labels[1]])
   

@@ -18,8 +18,8 @@ def test_LoadExcel():
                                       table_info,
                                       TestSettings.sample_data_footer_rows)
   data = Loading.LoadExcel(settings)
-  
-  assert data.at[2,"numbers"] == "11.0"
+  print(data.head())
+  assert data.at[2,"strings"] == "world"
   
 def test_LoadTestInvoices():
   table_info = ExcelInfoContainer()
