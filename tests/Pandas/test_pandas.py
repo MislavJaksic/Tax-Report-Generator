@@ -33,7 +33,7 @@ def test_PandasReadIntegerFloat(TestExcel):
   assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[2]] == 3
   
 def test_PandasReadFloat(TestExcel):
-  assert math.isclose(TestExcel.at[2,TestSettings.sample_data_renaming_labels[3]], 3.00001, abs_tol=0.001)
+  assert math.isclose(TestExcel.at[2,TestSettings.sample_data_renaming_labels[3]], 3.00401, abs_tol=0.000001)
 
 def test_PandasReadString(TestExcel):
   assert TestExcel.at[2,TestSettings.sample_data_renaming_labels[4]] == "world"

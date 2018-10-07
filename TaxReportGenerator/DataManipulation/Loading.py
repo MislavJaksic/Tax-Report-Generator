@@ -1,14 +1,3 @@
-# -*- encoding: utf-8 -*-
-
-import os
-import sys
-import inspect
-folder_list = os.path.abspath(inspect.getfile(inspect.currentframe())).split("\\")
-folder = folder_list.pop()
-while (folder_list[-1] != "TaxReportGenerator"):
-  folder_list.pop()
-sys.path.append(os.path.dirname("\\".join(folder_list)))
-
 import pandas
 
 

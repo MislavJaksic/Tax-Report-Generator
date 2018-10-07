@@ -1,4 +1,4 @@
-from TaxReportGenerator.Containers.TablesContainer import TablesContainer
+from TaxReportGenerator.Containers.ReportDataContainer import ReportDataContainer
 from TaxReportGenerator.Settings import DataSettings
 from TaxReportGenerator.Settings import LegalSettings
 
@@ -6,8 +6,8 @@ import pytest
 
 
 
-def test_TablesContainer():
-  data = TablesContainer(set([DataSettings.customers,
+def test_ReportDataContainer():
+  data = ReportDataContainer(set([DataSettings.customers,
                               DataSettings.vendors,
                               DataSettings.invoices,
                               DataSettings.IRA_EU,
