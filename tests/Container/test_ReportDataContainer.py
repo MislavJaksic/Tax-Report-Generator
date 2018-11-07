@@ -1,19 +1,19 @@
 from TaxReportGenerator.Containers.ReportDataContainer import ReportDataContainer
+from TaxReportGenerator.Settings import TestSettings
 from TaxReportGenerator.Settings import DataSettings
-from TaxReportGenerator.Settings import LegalSettings
 
 import pytest
 
 
 
 def test_ReportDataContainer():
-  data = ReportDataContainer(set([DataSettings.customers,
-                              DataSettings.vendors,
-                              DataSettings.invoices,
-                              DataSettings.IRA_EU,
-                              DataSettings.URA_EU_DC,
-                              DataSettings.URA_EU_DOM,
-                              DataSettings.URA_EU_UVOZ]))
+  data = ReportDataContainer(set([TestSettings.customers,
+                              TestSettings.vendors,
+                              TestSettings.invoices,
+                              TestSettings.IRA_EU,
+                              TestSettings.URA_EU_DC,
+                              TestSettings.URA_EU_DOM,
+                              TestSettings.URA_EU_UVOZ]))
   
   assert data.customers.at[0,DataSettings.tax_number_customers] + "string"
   assert data.vendors.at[0,DataSettings.tax_number_vendors] + "string"

@@ -32,6 +32,7 @@ def DiscardRowsWithoutIdentifier(invoices):
   
 def DiscardRowsWithIncorrectCurrency(invoices):
   #Delete rows with non HRK currency
+  print(invoices)
   return invoices[invoices[DataSettings.posting_currency_invoices] == LegalSettings.national_currency]
   
 def DeleteExtraColumns(invoices):

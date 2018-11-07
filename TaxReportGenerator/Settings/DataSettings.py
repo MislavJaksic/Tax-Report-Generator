@@ -2,7 +2,7 @@ thousands = "."
 
 
 
-customers_file_path = "data/real_data/KUPCI.xlsx"
+customers_file_path = "data/real_data/kupci.xlsx"
 customers = "customers"
 customers_skip_footer = 0
 
@@ -16,7 +16,7 @@ customers_columns = [("B", name_customers, "U"),
 
                     
                     
-vendors_file_path = "data/real_data/DOBAVLJAČI.xlsx"
+vendors_file_path = "data/real_data/dobavljaci.xlsx"
 vendors = "vendors"
 vendors_skip_footer = 0
 
@@ -40,18 +40,18 @@ invoice_number_invoices = "Invoice Nr"
 due_date_invoices = "Due Date"
 invoice_amount_invoices = "Invoice Amount Company Curr"
 customer_name_invoices = "Customer Name"
-invoices_columns = [("W", posting_date_invoices, "M"),
-                    ("N", posting_currency_invoices, "U"),
-                    ("Q", open_amount_invoices, "f"),
-                    ("I", invoice_number_invoices, "U"),
-                    ("V", due_date_invoices, "M"),
-                    ("O", invoice_amount_invoices, "f"),
+invoices_columns = [("U", posting_date_invoices, "M"),
+                    ("P", posting_currency_invoices, "U"),
+                    ("O", open_amount_invoices, "f"),
+                    ("G", invoice_number_invoices, "U"),
+                    ("T", due_date_invoices, "M"),
+                    ("M", invoice_amount_invoices, "f"),
                     ("C", customer_name_invoices, "U"),
                    ]
 
                    
 
-IRA_EU_file_path = "data/real_data/IRA_EU.xlsx"
+IRA_EU_file_path = "data/real_data/IRA EU.xlsx"
 IRA_EU = "IRA_EU"
 IRA_EU_skip_footer = 1
 
@@ -71,7 +71,7 @@ IRA_EU_columns = [("V", taxable_tax_IRA_EU, "f"),
 
                  
                  
-URA_EU_DC_file_path = "data/real_data/URA_EU_DC.xlsx"
+URA_EU_DC_file_path = "data/real_data/URA EU DC.xlsx"
 URA_EU_DC = "URA_EU_DC"
 URA_EU_DC_skip_footer = 1
 
@@ -85,7 +85,7 @@ URA_EU_DC_columns = [("E", vendors_id_URA_EU_DC, "U"),
 
                     
 
-URA_EU_DOM_file_path = "data/real_data/URA_EU_DOM.xlsx"
+URA_EU_DOM_file_path = "data/real_data/URA EU DOM.xlsx"
 URA_EU_DOM = "URA_EU_DOM"
 URA_EU_DOM_skip_footer = 1
 
