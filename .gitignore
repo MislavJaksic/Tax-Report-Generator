@@ -103,7 +103,14 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# Privacy exclusion
 
-TaxReportGenerator/Settings/LegalSettings.py
-data/real_data
+
+# File exclusion
+
+PDV.xml
+PDVS.xml
+ZP.xml
+OPZ.xml
+
+src/tax_report_generator/data_wrangling/data
+src/tax_report_generator/settings/report_settings.py
