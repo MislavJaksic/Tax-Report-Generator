@@ -16,141 +16,47 @@ class OPZGenerator(xml_generator.XMLGenerator):
   def __init__(self, data_wrapper):
     self.__SetDataFrames(data_wrapper)
     
-    self.__SetAndLoadRootElements()
+    report_name = xml_settings.opz_template
+    self.SetAndLoadRootElements(report_name)
     
-    self.__ConstructReport()
+    self.ConstructReport()
     
     lxml_functions.WriteTreeToFile(self.wrapper_tree, xml_settings.opz_output_file)
     
   def __SetDataFrames(self, data_wrapper):
-    invoices_file = data_settings.invoices_file
-    name, extension = pathfinder.SplitFileNameIntoNameAndExtension(invoices_file)
-    
+    name, extension = pathfinder.SplitFileNameIntoNameAndExtension(data_settings.invoices_file)
     self.invoices = copy.deepcopy(data_wrapper.data_frames[name])
     
-    customers_file = data_settings.customers_file
-    name, extension = pathfinder.SplitFileNameIntoNameAndExtension(customers_file)
-    
+    name, extension = pathfinder.SplitFileNameIntoNameAndExtension(data_settings.customers_file)
     self.customers = copy.deepcopy(data_wrapper.data_frames[name])
     
-  def __SetAndLoadRootElements(self):
-    report_name = xml_settings.opz_template
-    
-    wrapper_path = self.GetWrapperPath(report_name)
-    metadata_path = self.GetMetadataPath(report_name)
-    header_path = self.GetHeaderPath(report_name)
-    body_path = self.GetBodyPath(report_name)
-    
-    self.wrapper_tree = lxml_functions.LoadTree(wrapper_path)
-    metadata_tree = lxml_functions.LoadTree(metadata_path)
-    header_tree = lxml_functions.LoadTree(header_path)
-    body_tree = lxml_functions.LoadTree(body_path)
-    
-    self.wrapper_root = lxml_functions.GetRootElement(self.wrapper_tree)
-    self.metadata_root = lxml_functions.GetRootElement(metadata_tree)
-    self.header_root = lxml_functions.GetRootElement(header_tree)
-    self.body_root = lxml_functions.GetRootElement(body_tree)
-    
-  def __ConstructReport(self):
-    self.__FillOutMetadata()
-    lxml_functions.AddChildElementToElement(self.metadata_root, self.wrapper_root)
-    
-    self.__FillOutHeader()
-    lxml_functions.AddChildElementToElement(self.header_root, self.wrapper_root)
-    
-    body_element = self.__CreateAndFillOutBody()
-    lxml_functions.AddChildElementToElement(body_element, self.wrapper_root)
-    
-    
-    
-  def __FillOutMetadata(self):
-    for child_element in self.metadata_root:
-      data = False
-      child_tag = lxml_functions.GetTag(child_element)
-      
-      if child_tag == "Autor":
-        data = report_settings.Autor
-        
-      elif child_tag == "Datum":
-        data = self.GetIsoFormatDateTimeNow()
-        
-      elif child_tag == "Identifikator":
-        data = self.GetUUID4()
-      
-      if (data != False):
-        lxml_functions.SetElementText(child_element, data)
-    
-    
-    
-  def __FillOutHeader(self):
-    all_children = lxml_functions.GetAllSubElements(self.header_root)
-    for child_element in all_children:
-      data = False
-      child_tag = lxml_functions.GetTag(child_element)
-      
-      if child_tag == "DatumOd":
-        data = report_settings.DatumOd
-        
-      elif child_tag == "DatumDo":
-        data = report_settings.DatumDo
-        
-      elif child_tag == "OIB":
-        data = report_settings.OIB
-        
-      elif child_tag == "Naziv":
-        data = report_settings.Naziv
-        
-      elif child_tag == "Mjesto":
-        data = report_settings.Mjesto
-        
-      elif child_tag == "Ulica":
-        data = report_settings.Ulica
-        
-      elif child_tag == "Broj":
-        data = report_settings.Broj
-        
-      elif child_tag == "Ime":
-        data = report_settings.Ime
-        
-      elif child_tag == "Prezime":
-        data = report_settings.Prezime
-        
-      elif child_tag == "NaDan":
-        data = report_settings.NaDan
-        
-      elif child_tag == "NisuNaplaceniDo":
-        data = report_settings.NisuNaplaceniDo
-      
-      if (data != False):
-        lxml_functions.SetElementText(child_element, data)
   
   
-  
-  def __CreateAndFillOutBody(self):
+  def CreateAndFillOutBody(self):
     body_element = self.__ExtractBodyElement()
-    all_children = lxml_functions.GetAllSubElements(body_element)
+    children = lxml_functions.GetSubElements(body_element)
     
     customers_element = self.__FillOutCustomers()
     lxml_functions.InsertChildElementIntoElementAtIndex(customers_element, body_element, 0)
     
-    for child_element in all_children:
+    for child_element in children:
       data = False
       child_tag = lxml_functions.GetTag(child_element)
     
       if child_tag == "UkupanIznosRacunaObrasca":
-        data = lxml_functions.GetSumOfNameElementsOfElement("K5", customers_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("K5", customers_element)
         
       elif child_tag == "UkupanIznosPdvObrasca":
-        data = lxml_functions.GetSumOfNameElementsOfElement("K6", customers_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("K6", customers_element)
         
       elif child_tag == "UkupanIznosRacunaSPdvObrasca":
-        data = lxml_functions.GetSumOfNameElementsOfElement("K7", customers_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("K7", customers_element)
         
       elif child_tag == "UkupniPlaceniIznosRacunaObrasca":
-        data = lxml_functions.GetSumOfNameElementsOfElement("K8", customers_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("K8", customers_element)
         
       elif child_tag == "NeplaceniIznosRacunaObrasca":
-        data = lxml_functions.GetSumOfNameElementsOfElement("K9", customers_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("K9", customers_element)
         
       elif child_tag == "OPZUkupanIznosRacunaSPdv":
         data = 0.0
@@ -169,12 +75,10 @@ class OPZGenerator(xml_generator.XMLGenerator):
     customers_element = lxml_functions.CreateElement("Kupci")
     
     customer_counter = 1
-    while (not self.invoices.empty):
-      customer_column = data_settings.invoices_customer_name
-      customer_values = pandas_functions.GetColumnValuesFromFrame(customer_column, self.invoices)
-      customer_name = customer_values[0]
+    while (pandas_functions.IsFrameNotEmpty(self.invoices)):
+      customer_name = pandas_functions.GetFirstValueFromColumnFromFrame(data_settings.invoices_customer_name, self.invoices)
       
-      invoice_batch, self.invoices = pandas_functions.SplitFrameAlongColumnWithValue(self.invoices, customer_column, customer_name)
+      invoice_batch, self.invoices = pandas_functions.SplitFrameAlongColumnWithValue(self.invoices, data_settings.invoices_customer_name, customer_name)
       
       customer_element = self.__FillOutCustomerNumber(invoice_batch, customer_counter)
       lxml_functions.AddChildElementToElement(customer_element, customers_element)
@@ -185,16 +89,14 @@ class OPZGenerator(xml_generator.XMLGenerator):
      
   def __FillOutCustomerNumber(self, invoice_batch, number):
     customer_element = self.__ExtractCustomerElement()
-    all_children = lxml_functions.GetAllSubElements(customer_element)
+    children = lxml_functions.GetSubElements(customer_element)
     
     invoices_element = self.__FillOutInvoices(invoice_batch)
     lxml_functions.AddChildElementToElement(invoices_element, customer_element)
     
-    customer_column = data_settings.invoices_customer_name
-    customer_values = pandas_functions.GetColumnValuesFromFrame(customer_column, invoice_batch)
-    customer_name = customer_values[0]
+    customer_name = pandas_functions.GetFirstValueFromColumnFromFrame(data_settings.invoices_customer_name, invoice_batch)
     
-    for child_element in all_children:
+    for child_element in children:
       data = False
       child_tag = lxml_functions.GetTag(child_element)
     
@@ -205,32 +107,26 @@ class OPZGenerator(xml_generator.XMLGenerator):
         data = 1
         
       elif child_tag == "K3":
-        rows = pandas_functions.GetRowsInFrameWithValueInColumn(self.customers, customer_name, data_settings.customers_name)
-        if (rows.empty):
-          data = 'ERROR_NO_TAX_NUMBER'
-        else:
-          tax_number = data_settings.customers_tax_number
-          tax_values = pandas_functions.GetColumnValuesFromFrame(tax_number, rows)
-          number = tax_values[0]
-          data = transform_data.AddLeadingZerosToStringUntilLength(number, 11)
+        number = pandas_functions.GetValueFromColumnFromFrameIfColumnHasValue(data_settings.customers_tax_number, self.customers, data_settings.customers_name, customer_name)
+        data = transform_data.AddLeadingZerosToStringUntilLength(number, 11)
         
       elif child_tag == "K4":
         data = customer_name
         
       elif child_tag == "K5":
-        data = lxml_functions.GetSumOfNameElementsOfElement("R6", invoices_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("R6", invoices_element)
         
       elif child_tag == "K6":
-        data = lxml_functions.GetSumOfNameElementsOfElement("R7", invoices_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("R7", invoices_element)
         
       elif child_tag == "K7":
-        data = lxml_functions.GetSumOfNameElementsOfElement("R8", invoices_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("R8", invoices_element)
         
       elif child_tag == "K8":
-        data = lxml_functions.GetSumOfNameElementsOfElement("R9", invoices_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("R9", invoices_element)
         
       elif child_tag == "K9":
-        data = lxml_functions.GetSumOfNameElementsOfElement("R10", invoices_element)
+        data = lxml_functions.GetSumOfAllSubElementsWithTagPatternOfElement("R10", invoices_element)
       
       if (data != False):
         lxml_functions.SetElementText(child_element, data)
@@ -324,16 +220,3 @@ class OPZGenerator(xml_generator.XMLGenerator):
     
     return invoice_element
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-    

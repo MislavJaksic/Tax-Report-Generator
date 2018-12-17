@@ -5,6 +5,11 @@ import context
 from tax_report_generator.command_line_parsing import parser
 from tax_report_generator.data_wrangling import data_wrapper
 from tax_report_generator.xml_generating import opz_generator
+from tax_report_generator.xml_generating import pdv_generator
+from tax_report_generator.xml_generating import pdvs_generator
+from tax_report_generator.xml_generating import zp_generator
+
+from tax_report_generator.data_wrangling import pandas_functions
 
 
 
@@ -15,11 +20,15 @@ def Main():
   file_names = command_line_parser.GetFileNames()
   
   data = data_wrapper.DataFrameWrapper(file_names)
-  
+    
   if arguments.OPZ:
     opz_generator.OPZGenerator(data)
   if arguments.PDV:
-    pass#opz_generator.OPZGenerator(data)
+    pdv_generator.PDVGenerator(data)
+  if arguments.PDVS:
+    pdvs_generator.PDVSGenerator(data)
+  if arguments.ZP:
+    zp_generator.ZPGenerator(data)
 
 
 
