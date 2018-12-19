@@ -5,7 +5,7 @@ with open("README.rst") as f:
   readme = f.read()
 
 setup(
-  name="sample_package",
+  name="tax_report_generator",
   version="0.1.0",
   description="Tax Report Generator",
   long_description=readme,
@@ -16,6 +16,6 @@ setup(
   
   packages=find_packages(exclude=("tests", "docs")),
   
-  entry_points={"console_scripts" : ["project_name = src.big_package.runner:Run"]} 
+  entry_points={"console_scripts" : ["project_name = src.tax_report_generator.runner:Run"]} 
 )
 
