@@ -14,7 +14,10 @@ def GetValueFromColumnFromFrameIfColumnHasValue(value_column, frame, search_colu
   if rows.empty:
     rows = GetRowsInFrameWithValueInColumn(frame, str(value), search_column)
   if rows.empty:
-    rows = GetRowsInFrameWithValueInColumn(frame, int(value), search_column)
+    try:
+      rows = GetRowsInFrameWithValueInColumn(frame, int(value), search_column)
+    except:
+       pass
   if not rows.empty:
     value = GetFirstValueFromColumnFromFrame(value_column, rows)
   else:
