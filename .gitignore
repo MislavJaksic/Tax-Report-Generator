@@ -114,3 +114,4 @@ OPZ.xml
 
 src/tax_report_generator/data_wrangling/data
 src/tax_report_generator/settings/report_settings.py
+ad_hoc/

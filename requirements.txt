@@ -1,6 +1,0 @@
-requests==2.21.0
-pytest==4.0.1
-openpyxl==2.5.12
-pandas==0.23.4
-lxml==4.2.5
-
