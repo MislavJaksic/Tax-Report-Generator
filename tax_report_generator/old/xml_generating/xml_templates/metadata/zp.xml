@@ -1,0 +1,11 @@
+<Metapodaci xmlns="http://e-porezna.porezna-uprava.hr/sheme/Metapodaci/v2-0">
+    <Naslov dc="http://purl.org/dc/elements/1.1/title">Zbirna prijavu za isporuke dobara i usluga u druge države članice Europske unije</Naslov>
+    <Autor dc="http://purl.org/dc/elements/1.1/creator">Example</Autor>
+    <Datum dc="http://purl.org/dc/elements/1.1/date">2000-01-01T00:00:00</Datum>
+    <Format dc="http://purl.org/dc/elements/1.1/format">text/xml</Format>
+    <Jezik dc="http://purl.org/dc/elements/1.1/language">hr-HR</Jezik>
+    <Identifikator dc="http://purl.org/dc/elements/1.1/identifier">Example</Identifikator>
+    <Uskladjenost dc="http://purl.org/dc/terms/conformsTo">ObrazacZP-v1-0</Uskladjenost>
+    <Tip dc="http://purl.org/dc/elements/1.1/type">Elektronički obrazac</Tip>
+    <Adresant>Ministarstvo Financija, Porezna uprava, Zagreb</Adresant>
+</Metapodaci>

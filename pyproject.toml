@@ -2,19 +2,34 @@
 name = "tax-report-generator"
 version = "0.1.0"
 description = "Creates XML business tax reports."
+
+license = "MIT"
 authors = ["Mislav Jaksic <jaksicmislav@gmail.com>"]
+maintainers = []
+readme = "README.md"
+
+homepage = "https://github.com/MislavJaksic/Python-Project-Template"
+repository = "https://github.com/MislavJaksic/Python-Project-Template"
+documentation = "https://github.com/MislavJaksic/Python-Project-Template"
+
+keywords = []
+
+classifiers = []
 
 [tool.poetry.dependencies]
 python = "^3.8"
-requests = "2.24.0"
-openpyxl = "2.6.4"
-lxml = "^4.5.1"
+requests = "^2.22.0"
+openpyxl = "3.0.6"
+lxml = "4.6.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "4.6.11"
-pytest-cov = "2.10.0"
+pytest-cov = "^2.8.1"
 black = "^19.10b0"
-sphinx = "2.4.4"
+pytest = "^5.2"
+sphinx = "^2.3.1"
+
+[tool.poetry.scripts]
+tax-report-generator = "tax_report_generator.runner:run"
 
 [build-system]
 requires = ["poetry>=0.12"]

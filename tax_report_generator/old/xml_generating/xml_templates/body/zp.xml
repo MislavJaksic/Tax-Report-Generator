@@ -1,0 +1,19 @@
+<Tijelo>
+  <Isporuke>
+    <Isporuka>
+      <RedBr>1</RedBr>
+      <KodDrzave>Example</KodDrzave>
+      <PDVID>99999999</PDVID>
+      <I1>0.00</I1>
+      <I2>0.00</I2>
+      <I3>0.00</I3>
+      <I4>0.00</I4>
+    </Isporuka>
+  </Isporuke>
+  <IsporukeUkupno>
+    <I1>0.00</I1>
+    <I2>0.00</I2>
+    <I3>0.00</I3>
+    <I4>0.00</I4>
+  </IsporukeUkupno>
+</Tijelo>

@@ -1,0 +1,20 @@
+<Zaglavlje>
+  <Razdoblje>
+    <DatumOd>2000-01-01</DatumOd>
+    <DatumDo>2000-01-01</DatumDo>
+  </Razdoblje>
+  <Obveznik>
+    <Naziv>Example</Naziv>
+    <OIB>99999999999</OIB>
+    <Adresa>
+      <Mjesto>Example</Mjesto>
+      <Ulica>Example</Ulica>
+      <Broj>99999</Broj>
+    </Adresa>
+  </Obveznik>
+  <ObracunSastavio>
+    <Ime>Example</Ime>
+    <Prezime>Example</Prezime>
+  </ObracunSastavio>
+  <Ispostava>9999</Ispostava>
+</Zaglavlje>

@@ -105,13 +105,8 @@ venv.bak/
 
 
 
-# File exclusion
+# Additional exclusions
 
-PDV.xml
-PDVS.xml
-ZP.xml
-OPZ.xml
-
-src/tax_report_generator/data_wrangling/data
-src/tax_report_generator/settings/report_settings.py
+tax_report_generator/old/data_wrangling/data
+tax_report_generator/old/settings/report_settings.py
 ad_hoc/
